@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { subjet } from "../../../../../jwt/jwtservice";
@@ -8,6 +8,7 @@ import Api from "../../../service/apiRegistro/apiRegistro"
 import BlocosApi from "../../../service/api_secundaria"
 import { notify } from "../../../service/snackbarService";
 import { BtnGlobal } from "../../../../../components/btnGlobal/btnGlobal";
+import apiUsuario from "../../../../PaginaInicial/service/apiUsuario";
 
 // import DropPrincipal from "../../components/DropPrincipal/ImageDropZone";
 
@@ -21,6 +22,7 @@ type FormData = {
     criadorId: number,
     globalAtivo?: any,
     dataAcesso?: any,
+    filialSolicitado:any
 };
 type VisitanteData = {
     id: any,
@@ -79,6 +81,10 @@ export const SlidePortariaComponent = ({ visitante, tipo }: SlideProps) => {
             if(tipoAcesso==null){
                data.tipoAcesso = visitante.categoriaAcesso;
             }
+             if (!data.filialSolicitado) {
+                                notify("Selecione a filial da Solicitação", "error")
+                                return;
+                            }
             const resposta = await Api.RegistroFactory(data);
             if (resposta) {
                 setbloqueioBTN(false)
@@ -125,6 +131,21 @@ export const SlidePortariaComponent = ({ visitante, tipo }: SlideProps) => {
         buscar_recorencia();
         hendleBusca();
     }, []);
+    const [listaFiliais,setListaFiliais]=useState<any[]>([])
+
+     const carregarFiliais = useCallback(async () => {
+            try {
+                const resposta = await apiUsuario.FiliaisUsuario(usuario?.id);
+                if (resposta?.acess) {
+                    setListaFiliais(resposta.acess);
+                }
+            } catch (error) {
+                notify("Erro ao carregar filiais", "error");
+            }
+        }, []);
+        useEffect(() => {
+            carregarFiliais();
+        }, [])
     return (
         <>
             <Template.container>
@@ -153,12 +174,30 @@ export const SlidePortariaComponent = ({ visitante, tipo }: SlideProps) => {
                                 <Template.Label>NumeroTelefone:</Template.Label>
                                 <Template.LabelSubtitulo>{visitante?.numeroTelefone}</Template.LabelSubtitulo>
                             </Template.AreaItemJust>
+                            {/* <Template.AreaItemJust>
+                                <Template.Label>Placa:</Template.Label>
+                                <Template.LabelSubtitulo>{visitante?.placaVeiculo}</Template.LabelSubtitulo>
+                            </Template.AreaItemJust> */}
                             {/* <p><strong>Data entrada:</strong> <Template.Bold>1100011</Template.Bold></p> */}
                         </Template.ItemDetails>
                     </Template.CardCentro>
                     <Template.pedidos>
                         <Template.FormSub >
                             <Template.Select>
+                                 <Template.leftArea>
+                                    <Template.CamposInput>
+                                        <Template.label >Filial Destino<Resize>*</Resize></Template.label>
+                                        <Template.SelectItens {
+                                            ...register("filialSolicitado", { required: "Selecione a filial de Destino" })}>
+                                            <Template.Options value="">Selecione</Template.Options>
+                                            {listaFiliais.flatMap((item) => (
+                                                <Template.Options value={item?.filial}>{item?.filial + "-"+ item?.nome.toUpperCase()}</Template.Options>
+
+                                            ))}
+                                        </Template.SelectItens>
+                                        {errors.bloco && <Template.Erros><p>{errors?.bloco?.message}</p></Template.Erros>}
+                                    </Template.CamposInput>
+                                </Template.leftArea>
                                 {/* Select 1  corrigido*/}
                                 <Template.leftArea>
                                     <Template.CamposInput>

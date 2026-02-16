@@ -55,9 +55,10 @@ export const CardItensComponents = ({ c, handleFunction }: props) => {
                     <Template.Thead>
                         <tr>
                             <th>Tipo</th>
-                            <th>Porto</th>
-                            <th>portaria</th>
-                            <th>Pendentes</th>
+                            <th> Descarreado<br /> portaria</th>
+                            <th> Descarregado <br /> Porto</th>
+                            <th>Total Descarregado</th>
+                            <th>Descarregado <br /> Pendentes</th>
                             {/* <th>Ações</th> */}
                         </tr>
                     </Template.Thead>
@@ -65,14 +66,22 @@ export const CardItensComponents = ({ c, handleFunction }: props) => {
                         {c.itens.map((item: any, i: any) => (
                             <Template.Tr key={i}>
                                 <td className="bold">{item?.TipoBloco}</td>
-                                <td className="status-ativo">{item?.qtdPortoDescarregado?item.qtdPortoDescarregado:0}</td>
-                                <td className="status-ativo">{item?.qtdPortariaDescarregada?item?.qtdPortariaDescarregada:0}</td>
+                                <td className="status-ativo">{item?.qtdPortoDescarregado ? item.qtdPortoDescarregado : 0}</td>
+                                <td className="status-ativo">{item?.qtdPortariaDescarregada ? item?.qtdPortariaDescarregada : 0}</td>
+                                <td className="status-total">{item?.qtdtTotalCargaConcluida}</td>
                                 <td className="status-manutencao">{item?.qtdDescargasPendentes}</td>
-                                {/* <td>
-                                    <Template.ViewButton>Detalhes</Template.ViewButton>
-                                </td> */}
+
                             </Template.Tr>
+
+
                         ))}
+                        <Template.Tr>
+                            <td className="bold">Total</td>
+                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralPortaria || 0), 0)}</td>
+                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralPorto || 0), 0)}</td>
+                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralDescarregado || 0), 0)}</td>
+                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralPendente || 0), 0)}</td>
+                        </Template.Tr>
                     </Template.Tbody>
                 </Template.Table>
                 {activeModal &&
