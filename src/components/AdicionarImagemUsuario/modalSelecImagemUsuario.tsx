@@ -22,7 +22,7 @@ export const ModalSelectImagemUsuarioComponent = ({ handleConfirm,handleFileSele
               {message}
             </Typography>
           </Typography>
-          <DropPrincipal onFileSelect={handleFileSelect} resetSignal={resetSignal}/>
+          <DropPrincipal onFileSelect={handleFileSelect} resetSignal={resetSignal} permission={"UNICO"}/>
 
           <Template.buttons>
             {ativoBtn &&

@@ -307,7 +307,7 @@ function RegistrosPortariaAntigo (){
                                     </Template.CamposInput>
                                 </Template.Select>
                                 <Template.label>IMG visitante<Resize>*</Resize></Template.label>
-                                <DropPrincipal onFileSelect={handleFileSelect} titulo={"Clique ou arraste outra imagem para substituir"} resetSignal={resetCounter} />
+                                <DropPrincipal permission={undefined} onFileSelect={handleFileSelect} titulo={"Clique ou arraste outra imagem para substituir"} resetSignal={resetCounter} />
                                 {selectedFile && <p>Arquivo selecionado: {selectedFile.name}</p>}
 
                             </Template.FormSub>
