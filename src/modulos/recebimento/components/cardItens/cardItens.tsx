@@ -55,10 +55,10 @@ export const CardItensComponents = ({ c, handleFunction }: props) => {
                         <Template.Thead>
                             <tr>
                                 <th style={{ textAlign: 'left' }}>Tipo</th>
-                                <th>Portaria</th>
-                                <th>Porto</th>
-                                <th>Total</th>
-                                <th>Pendentes</th>
+                                <th>Descarregado <br/>Portaria</th>
+                                <th>Descarregado <br/>Porto</th>
+                                <th>Descarregado <br/> Total</th>
+                                <th>Pendente <br/>Descarregar</th>
                             </tr>
                         </Template.Thead>
                         <Template.Tbody>

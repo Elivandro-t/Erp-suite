@@ -1,4 +1,4 @@
-import{r as c,j as e,d as ue,i as F,ar as xe,B as fe,as as ge,I as ee,K as he,b as $,A as be,W as je,$ as ve}from"./mui-_wqMIBiI.js";import{d as o,m as G,j as Ce,b as oe,n as E,A as we,L as Se}from"./index-BYSqOyoE.js";import{M as Ie}from"./BotaoVoltar-CxvXsGU3.js";import{s as K,c as D}from"./PortariaRoutes-CKRfdjmf.js";import{i as Ae,u as ye,b as Re}from"./menuConfig-C5Fu2Emn.js";import"./react-OvXVS5lI.js";import"./NotFund-CATxkBTh.js";const t={Area:o.div`
+import{r as c,j as e,d as ue,i as F,ar as xe,B as fe,as as ge,I as ee,K as he,b as $,A as be,W as je,$ as ve}from"./mui-_wqMIBiI.js";import{d as o,m as G,j as Ce,b as oe,n as E,A as we,L as Se}from"./index-DDiw_5kW.js";import{M as Ie}from"./BotaoVoltar-CtOoKzJN.js";import{s as K,c as D}from"./PortariaRoutes-DpTcdAOO.js";import{i as Ae,u as ye,b as Re}from"./menuConfig-C_SDYVzO.js";import"./react-OvXVS5lI.js";import"./NotFund-DKzA1gWG.js";const t={Area:o.div`
     background-color: #f1f5f9; /* Fundo levemente cinza para destacar o card branco */
     min-height: 100vh;
     padding: 10px;
