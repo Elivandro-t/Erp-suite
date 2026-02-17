@@ -58,7 +58,7 @@ export const CardItensComponents = ({ c, handleFunction }: props) => {
                                 <th>Descarregado <br/>Portaria</th>
                                 <th>Descarregado <br/>Porto</th>
                                 <th>Descarregado <br/> Total</th>
-                                <th>Pendente <br/>Descarregar</th>
+                                <th>Pendente <br/>para Descarregar</th>
                             </tr>
                         </Template.Thead>
                         <Template.Tbody>
