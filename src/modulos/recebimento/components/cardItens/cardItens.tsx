@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Template from "../../factures/Dashboard/Painel.styles"
+import Template from "./cardItens.syled"
 import { Dialogs } from "../dialogs/Dialogs";
 import { UpdateRegistro } from "../update/update";
 import PositionedMenu from "../btn/btnMenu";
@@ -34,59 +34,59 @@ export const CardItensComponents = ({ c, handleFunction }: props) => {
         }
     }
     return (
-        <Template.Container >
+        <Template.Container>
             <Template.Card>
                 <Template.CardHeaderPrincipal>
-                    <div className="info-title" style={{ paddingTop: 5 }}>
-                        <span className="tag">Resumo do Dia</span>
-                        <span className="tag"> Criador: <small style={{ color: "#000" }}>{c?.nomeUsuario}</small></span>
+                    <div className="info-title">
+                        <span className="tag">Resumo Portaria</span>
+                        <span className="tag">User: {c?.nomeUsuario?.split(' ')[0]}</span>
                         <h4 className="titulo">{c?.filial} - {c?.nomeFilial}</h4>
                     </div>
-                    <Template.info_date className="info-date">
-                        <span>📅  {handleConvertData(c?.dataAt)}</span>
-                        {permission?.includes("DELETE_LOGISTICO") &&
+                    <Template.info_date>
+                        <span>📅 {handleConvertData(c?.dataAt)}</span>
+                        {permission?.includes("DELETE_LOGISTICO") && (
                             <PositionedMenu hendleClick={handeClick} hendleClickDelete={handeClickDelete} />
-
-                        }
+                        )}
                     </Template.info_date>
                 </Template.CardHeaderPrincipal>
 
-                <Template.Table>
-                    <Template.Thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th> Descarreado<br /> portaria</th>
-                            <th> Descarregado <br /> Porto</th>
-                            <th>Total Descarregado</th>
-                            <th>Descarregado <br /> Pendentes</th>
-                            {/* <th>Ações</th> */}
-                        </tr>
-                    </Template.Thead>
-                    <Template.Tbody>
-                        {c.itens.map((item: any, i: any) => (
-                            <Template.Tr key={i}>
-                                <td className="bold">{item?.TipoBloco}</td>
-                                <td className="status-ativo">{item?.qtdPortoDescarregado ? item.qtdPortoDescarregado : 0}</td>
-                                <td className="status-ativo">{item?.qtdPortariaDescarregada ? item?.qtdPortariaDescarregada : 0}</td>
-                                <td className="status-total">{item?.qtdtTotalCargaConcluida}</td>
-                                <td className="status-manutencao">{item?.qtdDescargasPendentes}</td>
-
+                <Template.TableWrapper>
+                    <Template.Table>
+                        <Template.Thead>
+                            <tr>
+                                <th style={{ textAlign: 'left' }}>Tipo</th>
+                                <th>Portaria</th>
+                                <th>Porto</th>
+                                <th>Total</th>
+                                <th>Pendentes</th>
+                            </tr>
+                        </Template.Thead>
+                        <Template.Tbody>
+                            {c.itens.map((item: any, i: number) => (
+                                <Template.Tr key={i}>
+                                    <td className="bold">{item?.TipoBloco}</td>
+                                    <td className="val-portaria">{item?.qtdPortariaDescarregada ?? 0}</td>
+                                    <td className="val-porto">{item?.qtdPortoDescarregado ?? 0}</td>
+                                    <td className="val-total">{item?.qtdtTotalCargaConcluida}</td>
+                                    <td className="val-pendente">{item?.qtdDescargasPendentes}</td>
+                                </Template.Tr>
+                            ))}
+                            <Template.Tr className="footer-row">
+                                <td className="bold">TOTAL</td>
+                                <td className="val-portaria">{c?.resumoTotal?.portariaTotalConsolidada}</td>
+                                <td className="val-porto">{c?.resumoTotal?.portoTotalConsolidado}</td>
+                                <td className="val-total total-geral">{c?.resumoTotal?.volumeTotalConsolidado}</td>
+                                <td className="val-pendente">{c?.resumoTotal?.pendentesTotalConsolidada}</td>
                             </Template.Tr>
+                        </Template.Tbody>
+                    </Template.Table>
+                </Template.TableWrapper>
 
-
-                        ))}
-                        <Template.Tr>
-                            <td className="bold">Total</td>
-                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralPortaria || 0), 0)}</td>
-                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralPorto || 0), 0)}</td>
-                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralDescarregado || 0), 0)}</td>
-                            <td className="status-manutencao"> {c.itens.reduce((acc: number, cur: any) => acc + (cur?.resumo.totalGeralPendente || 0), 0)}</td>
-                        </Template.Tr>
-                    </Template.Tbody>
-                </Template.Table>
-                {activeModal &&
-                    <Dialogs handleInative={handeClick} ><UpdateRegistro onClickhTogle={handleFunction} registroId={c.id} itemMP={c.itens} ></UpdateRegistro></Dialogs>
-                }
+                {activeModal && (
+                    <Dialogs handleInative={handeClick}>
+                        <UpdateRegistro onClickhTogle={handleFunction} registroId={c.id} itemMP={c.itens} />
+                    </Dialogs>
+                )}
             </Template.Card>
         </Template.Container>
     );

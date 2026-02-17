@@ -14,7 +14,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt'; // Ou FormatListBulleted
 import AddIcon from '@mui/icons-material/Add';
 import { subjet } from "../../../../jwt/jwtservice";
 const actions = [
-    { icon: <AddIcon />, name: 'Adicionar', router: "/recebimento/novo-logistico" },
+    { icon: <AddIcon />, name: 'Adicionar', router: "/recebimento/novo" },
     { icon: <ListAltIcon />, name: 'Todas os itens', router: "/recebimento/listaFiliais" },
 ];
 const PainelRecebimento = () => {
