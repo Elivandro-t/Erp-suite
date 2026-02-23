@@ -229,6 +229,11 @@ const salvaImagemUsuario = async (endpoint: any, usuarioId: any, file: File) => 
 }
 
 
+const baixarApp = async(endpoint:any)=>{
+  const resposta  = await axios.get(endpoint)
+  return resposta.data;
+}
+
 ////////////////////////////
 const api = {
   //api de login
@@ -292,6 +297,10 @@ const api = {
   },
   addFiliais:async(lista:any,usuarioId:any)=>{
     const json = await addFilial(`/module/v1/filial/add/${usuarioId}`,lista);
+    return json;
+  },
+  baixarApp:async()=>{
+    const json = await baixarApp("/app-downloads");
     return json;
   }
 }

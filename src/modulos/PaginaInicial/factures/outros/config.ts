@@ -49,10 +49,10 @@ export default [
      "ativo":false
   },
   {
-    "label": "Auditoria",
-    "desc": "Acompanhar ações dos usuários.",
-    "to": "/required/auditoria",
-    "icon": "VisibilityIcon",
-     "ativo":false
+    "label": "App",
+    "desc": "Baixe o app.",
+    "to": "/required/app",
+    "icon": "App",
+     "ativo":true
   }
 ]

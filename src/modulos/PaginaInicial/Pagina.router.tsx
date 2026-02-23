@@ -15,6 +15,7 @@ import { AlterarSenhaUsuarioComponent } from "./factures/resetsenha/resetSenha"
 import { HomeItens } from "./factures/homeItens/HomeItens"
 import { MeuPerfil } from "./factures/meu_perfil/meu_Perfil"
 import NotFund from "../../paga_segunds/404/NotFund"
+import BaixeOApp from "./factures/app/app"
 
 const PaginaInicialRouter = () => {
     return (
@@ -27,8 +28,12 @@ const PaginaInicialRouter = () => {
                         />
                     </ProtectedRoute>
                 }>
-
                 </Route>
+                <Route path="app" element={
+                        <ProtectedRoute allowedPermissions={["GERENCIAR_USUARIOS"]}>
+                            <BaixeOApp />
+                        </ProtectedRoute>
+                    }></Route>
                 <Route path="profile" element={
                     <MeuPerfil key={Date.now()}
                     />

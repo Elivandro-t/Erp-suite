@@ -17,7 +17,6 @@ export const SnackbarProvider = ({ children }: Props) => {
     setSeverity(sev);
     setOpen(true);
   };
-
   useEffect(() => {
     setSnackbarHandler(showMessage);
   }, []);

@@ -15,7 +15,7 @@ function PaginaInicial() {
         };
     }, []);
 
-    const [ativoMenu, setAtivoMenu] = useState(false)
+    const [ativoMenu, setAtivoMenu] = useState(true)
     const handleBtn = () => {
         setAtivoMenu(!ativoMenu)
     }
