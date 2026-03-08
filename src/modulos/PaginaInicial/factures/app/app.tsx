@@ -118,6 +118,7 @@ export default function BaixeOApp() {
             if (responseApi) {
                 setDadosApp(responseApi);
                 setStatus(`Baixando: ${responseApi?.nome || 'Aplicativo'}`);
+                console.error("Erro "+responseApi?.url)
 
                 const responseFile = await fetch(responseApi.url);
                 if (!responseFile.body) throw new Error("Falha ao ler corpo da resposta");
@@ -147,7 +148,6 @@ export default function BaixeOApp() {
                 a.download = `${responseApi?.nome || 'app'}.apk`;
                 document.body.appendChild(a);
                 a.click();
-                a.remove();
 
                 setTimeout(() => setDownloading(false), 3000);
             }
