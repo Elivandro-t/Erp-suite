@@ -9,7 +9,7 @@ export const LoadingR = () => {
         const redirect =sessionStorage.getItem("redirectAfterLogin") || "/";
                sessionStorage.removeItem("redirectAfterLogin");
             if (isLogged) {
-            window.location.href = redirect;
+               window.location.href = redirect;
             }else{
                 navigate("/login", { replace: true })
 
@@ -18,9 +18,8 @@ export const LoadingR = () => {
 
     useEffect(() => {
          const clearIteval =  setTimeout(()=>{
-     
             validationUser();
-            },3000)
+            },1000)
         return ()=>clearTimeout(clearIteval)
 
         
