@@ -23,7 +23,7 @@ function PaginaInicial() {
     return (
         <Template.container>
             {ativoMenu &&
-                          <MenuDropComponent handleBtn={handleBtn} ></MenuDropComponent>
+                <MenuDropComponent handleBtn={null} ></MenuDropComponent>
 
             }
             <Template.main>

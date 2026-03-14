@@ -58,25 +58,7 @@ function PortariaRoutes() {
                         />
                     </ProtectedRoute>
                 } />
-                <Route path="historico" element={
-                    <ProtectedRoute allowedPermissions={["GERENCIAR_REGISTROS"]}>
-                        <ListahistoryComponent key={Date.now()}
-                        />
-                    </ProtectedRoute>
-                } />
-                <Route path="geral" element={
-                    <ProtectedRoute allowedPermissions={["GERENCIAR_REGISTROS"]}>
-                        <ListaRegistroComponent key={Date.now()}
-                        />
-                    </ProtectedRoute>
-                } />
-                <Route path="novo" element={
-                    <ProtectedRoute allowedPermissions={["CRIAR_REGISTRO"]}>
-                        <RegistrosPortaria key={Date.now()}
-                        />
-                    </ProtectedRoute>
-                }>
-                </Route>
+                
                 <Route path="my-count" element={
                     <MeuPerfil key={Date.now()}
                     />

@@ -54,8 +54,8 @@ const Styles = {
         width: 100%;
         overflow-x: auto;
         transform: rotateX(180deg); 
-        &::-webkit-scrollbar { height: 6px; }
-        &::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        /* &::-webkit-scrollbar { height: 6px; }
+        &::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; } */
     `,
     Table: styled.table`
         width: 100%;

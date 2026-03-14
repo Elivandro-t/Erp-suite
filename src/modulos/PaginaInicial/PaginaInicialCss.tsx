@@ -1,101 +1,70 @@
+import { MdInbox } from "react-icons/md";
 import styled from "styled-components";
 
 export default {
   container: styled.div`
     display: flex;
-    width: 100vw;
     height: 100vh;
-    background-color: #f8fafc; /* Um cinza azulado bem leve para o fundo */
-    overflow: hidden;
+    background-color: #f2f6fa; /* Fundo azulado bem claro */
   `,
-
-  main: styled.main`
+  main: styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    position: relative;
-    background-color: #f8fafc;
+    overflow: hidden;
   `,
-
-  // Área onde o conteúdo (Outlet) aparece com scroll
   scroll: styled.div`
     flex: 1;
     overflow-y: auto;
-    padding: 30px;
-    
-    /* Scrollbar minimalista para não poluir o design */
-    &::-webkit-scrollbar { width: 6px; }
-    &::-webkit-scrollbar-thumb {
-      background: #e2e8f0;
-      border-radius: 10px;
-    }
+    padding: 0 5px;
   `,
-
-  // Estilização para a Grid de Módulos (caso use na Home)
   grid: styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
   `,
-
-  // Card Moderno com o BoxShadow que você pediu
   link: styled.div`
     background: #ffffff;
-    border-radius: 16px;
-    padding: 32px;
+    padding: 30px;
+    border-radius: 20px; /* Bem arredondado como na imagem */
+    border: none;
+    box-shadow: 0px 7px 30px 0px rgba(90, 114, 123, 0.11);
+    cursor: pointer;
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    border: 1px solid #f1f5f9;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 4px;
-      height: 100%;
-      background: #5d87ff;
-      opacity: 0;
-      transition: 0.3s;
-    }
 
     &:hover {
       transform: translateY(-5px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-      border-color: #5d87ff33;
-      
-      &::after { opacity: 1; }
+      box-shadow: 0px 10px 30px 0px rgba(90, 114, 123, 0.2);
+    }
+
+    /* Estilização do ícone estilo Modernize */
+    svg {
+        color: #5d87ff;
+        background: #ecf2ff; /* Fundo pastel */
+        padding: 12px;
+        border-radius: 12px;
+        width: 45px;
+        height: 45px;
+        margin-bottom: 20px;
     }
   `,
-
-  card_title: styled.h3`
+  card_title: styled.div`
     font-size: 18px;
+    font-weight: 600;
     color: #2a3547;
-    font-weight: 700;
-    margin: 8px 0 0 0;
+    margin-bottom: 5px;
   `,
-
-  card_desc: styled.p`
-    font-size: 13px;
+  card_desc: styled.div`
+    font-size: 14px;
     color: #7c8fac;
-    line-height: 1.5;
-    margin: 0;
+    line-height: 1.6;
   `,
-
   footer: styled.footer`
     padding: 20px;
     text-align: center;
-    color: #94a3b8;
-    font-size: 12px;
-    font-weight: 500;
+    color: #7c8fac;
+    font-size: 13px;
   `
 };

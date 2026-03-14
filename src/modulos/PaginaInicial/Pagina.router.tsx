@@ -16,6 +16,10 @@ import { HomeItens } from "./factures/homeItens/HomeItens"
 import { MeuPerfil } from "./factures/meu_perfil/meu_Perfil"
 import NotFund from "../../paga_segunds/404/NotFund"
 import BaixeOApp from "./factures/app/app"
+import { RegistrosPortaria } from "../portaria/factures/novo registro/registroPortaria"
+import { ListaRegistroComponent } from "../portaria/factures/history/RegistroFiliais/ListaRegistroHistory"
+import { ListahistoryComponent } from "../portaria/factures/history/lista/ListaHistory"
+import { VisitantesListaComponets } from "../portaria/factures/Visitantes/visitantes"
 
 const PaginaInicialRouter = () => {
     return (
@@ -30,10 +34,10 @@ const PaginaInicialRouter = () => {
                 }>
                 </Route>
                 <Route path="app" element={
-                        <ProtectedRoute allowedPermissions={["GERENCIAR_USUARIOS"]}>
-                            <BaixeOApp />
-                        </ProtectedRoute>
-                    }></Route>
+                    <ProtectedRoute allowedPermissions={["GERENCIAR_USUARIOS"]}>
+                        <BaixeOApp />
+                    </ProtectedRoute>
+                }></Route>
                 <Route path="profile" element={
                     <MeuPerfil key={Date.now()}
                     />
@@ -93,6 +97,35 @@ const PaginaInicialRouter = () => {
                         />
                     </ProtectedRoute>
                 } />
+                <Route path="visitantes" element={
+                    <ProtectedRoute allowedPermissions={["GERENCIAR_USUARIOS"]}>
+                        <VisitantesListaComponets key={Date.now()}
+                        />
+                    </ProtectedRoute>
+                } />
+                <Route path="historico" element={
+                    <ProtectedRoute allowedPermissions={["GERENCIAR_REGISTROS"]}>
+                        <ListahistoryComponent key={Date.now()}
+                        />
+                    </ProtectedRoute>
+                } />
+                <Route path="geral" element={
+                    <ProtectedRoute allowedPermissions={["GERENCIAR_REGISTROS"]}>
+                        <ListaRegistroComponent key={Date.now()}
+                        />
+                    </ProtectedRoute>
+                } />
+                <Route path="novo" element={
+                    <ProtectedRoute allowedPermissions={["CRIAR_REGISTRO"]}>
+                        <RegistrosPortaria key={Date.now()}
+                        />
+                    </ProtectedRoute>
+                }>
+                </Route>
+                <Route path="my-count" element={
+                    <MeuPerfil key={Date.now()}
+                    />
+                } />
             </Route>
             <Route path="/config" element={
                 <ProtectedRoute allowedPermissions={["LISTA_GERAL"]}>
@@ -100,7 +133,7 @@ const PaginaInicialRouter = () => {
                     />
                 </ProtectedRoute>
             } >
-            
+
 
 
             </Route>

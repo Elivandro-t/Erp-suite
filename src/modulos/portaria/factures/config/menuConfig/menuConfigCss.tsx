@@ -13,6 +13,21 @@ export default {
 
     }
   `,
+
+  tituloTexto: styled.h1`
+    font-size: 18px;
+    font-weight: 800;
+    color: #004d40;
+    cursor: pointer;
+    margin: 0;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+
+    span {
+      color: #26a69a;
+      font-weight: 400;
+    }
+    `,
   areaMenu: styled.div`
   display: flex;
   align-items: center;

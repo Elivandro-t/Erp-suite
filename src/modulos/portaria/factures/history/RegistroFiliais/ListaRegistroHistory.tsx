@@ -103,8 +103,8 @@ export const ListaRegistroComponent = () => {
               <SearchIcon />
               <input type="text" placeholder="Nome ou placa..." value={busca} onChange={(e) => setBusca(e.target.value)} />
             </div>
-            
-            <SelectVariants value={selectedValue} onChange={setSelectedValue} titulo={"Status"} list={[{nome: "Aberto", value: true}, {nome: "Fechado", value: false}]} />
+
+            <SelectVariants value={selectedValue} onChange={setSelectedValue} titulo={"Status"} list={[{ nome: "Aberto", value: true }, { nome: "Fechado", value: false }]} />
             <SelectVariants value={selectedFilial} onChange={setSelectedFilial} titulo={"Filial"} list={filiais} />
 
             <IconButton onClick={() => onSubmit()} sx={{ bgcolor: '#26a69a', color: 'white', '&:hover': { bgcolor: '#00897b' }, borderRadius: '8px' }}>
@@ -119,6 +119,7 @@ export const ListaRegistroComponent = () => {
             <Template.Table>
               <thead>
                 <tr>
+                  <th style={{ textAlign: 'right' }}>Ações</th>
                   <th>Visitante</th>
                   <th>Protocolo</th>
                   <th>Tipo / Placa</th>
@@ -127,14 +128,18 @@ export const ListaRegistroComponent = () => {
                   <th>Status</th>
                   <th>Entrada</th>
                   <th>Saída</th>
-                  <th style={{ textAlign: 'right' }}>Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <Template.loadingRow><td colSpan={9}><CircularProgress size={24} sx={{color: '#26a69a'}} /></td></Template.loadingRow>
+                  <Template.loadingRow><td colSpan={9}><CircularProgress size={24} sx={{ color: '#26a69a' }} /></td></Template.loadingRow>
                 ) : lista.map((row, key) => (
                   <tr key={key}>
+                    <td>
+                      <Template.trBTN>
+                        <IconButton size="small" onClick={(e) => handleOpenMenu(e, row)}><MoreVertIcon sx={{ fontSize: 20 }} /></IconButton>
+                      </Template.trBTN>
+                    </td>
                     <td>
                       <Stack direction="row" spacing={1.5} alignItems="center">
                         <Avatar sx={{ width: 34, height: 34, fontSize: '0.8rem', fontWeight: 700 }} src={row?.visitante?.imagem} />
@@ -146,22 +151,17 @@ export const ListaRegistroComponent = () => {
                     </td>
                     <td><Typography sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '0.75rem', color: '#26a69a' }}>#{row?.protocolo}</Typography></td>
                     <td>
-                        <Typography sx={{ fontSize: '0.8rem' }}>{row?.visitante?.tipoPessoa}</Typography>
-                        <Typography sx={{ fontSize: '0.68rem', color: '#26a69a', fontWeight: 800 }}>{row?.placaVeiculo || "SEM VEÍCULO"}</Typography>
+                      <Typography sx={{ fontSize: '0.8rem' }}>{row?.visitante?.tipoPessoa}</Typography>
+                      <Typography sx={{ fontSize: '0.68rem', color: '#26a69a', fontWeight: 800 }}>{row?.placaVeiculo || "SEM VEÍCULO"}</Typography>
                     </td>
                     <td>
-                        <Typography sx={{ fontSize: '0.8rem' }}>{row?.ocupacaoLiberada || "---"}</Typography>
-                        <Typography sx={{ fontSize: '0.68rem', color: '#4a635d' }}>{row?.visitante?.recorrencia?.nome || "---"}</Typography>
+                      <Typography sx={{ fontSize: '0.8rem' }}>{row?.ocupacaoLiberada || "---"}</Typography>
+                      <Typography sx={{ fontSize: '0.68rem', color: '#4a635d' }}>{row?.visitante?.recorrencia?.nome || "---"}</Typography>
                     </td>
                     <td><Typography sx={{ fontSize: '0.8rem' }}>{row?.bloco}</Typography></td>
                     <td><Template.Chip color={retornaCorStatus(row?.status)}>{row?.status.replace("_", " ")}</Template.Chip></td>
                     <td><Typography sx={{ fontSize: '0.7rem' }}>{row?.entrada?.dataEntrada ? new Date(row.entrada.dataEntrada).toLocaleString() : "---"}</Typography></td>
                     <td><Typography sx={{ fontSize: '0.7rem' }}>{row?.saida?.dataSaida ? new Date(row.saida.dataSaida).toLocaleString() : "---"}</Typography></td>
-                    <td>
-                      <Template.trBTN>
-                        <IconButton size="small" onClick={(e) => handleOpenMenu(e, row)}><MoreVertIcon sx={{fontSize: 20}} /></IconButton>
-                      </Template.trBTN>
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -173,43 +173,43 @@ export const ListaRegistroComponent = () => {
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
         <MenuItem onClick={() => { navigate(`/portaria/controle/detalhes-registro?order=${itemSelecionado.id}`); handleCloseMenu(); }}>
           <ListItemIcon><VisibilityIcon fontSize="small" /></ListItemIcon>
-          <ListItemText primaryTypographyProps={{fontSize: '0.85rem'}}>Ver Detalhes</ListItemText>
+          <ListItemText primaryTypographyProps={{ fontSize: '0.85rem' }}>Ver Detalhes</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => { setItem(itemSelecionado); setExibeImagem(true); handleCloseMenu(); }}>
-          <ListItemIcon><ImageIcon fontSize="small" sx={{color: '#26a69a'}} /></ListItemIcon>
-          <ListItemText primaryTypographyProps={{fontSize: '0.85rem'}}>Ver Fotos</ListItemText>
+          <ListItemIcon><ImageIcon fontSize="small" sx={{ color: '#26a69a' }} /></ListItemIcon>
+          <ListItemText primaryTypographyProps={{ fontSize: '0.85rem' }}>Ver Fotos</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => { setId(itemSelecionado.id); setMsg(`Deseja excluir o registro ${itemSelecionado.id}?`); setAtivo(true); handleCloseMenu(); }}>
           <ListItemIcon><DeleteIcon fontSize="small" color="error" /></ListItemIcon>
-          <ListItemText primaryTypographyProps={{fontSize: '0.85rem', color: 'error.main'}}>Deletar</ListItemText>
+          <ListItemText primaryTypographyProps={{ fontSize: '0.85rem', color: 'error.main' }}>Deletar</ListItemText>
         </MenuItem>
       </Menu>
 
       {/* MODAL DE IMAGENS COM DOWNLOAD RESTAURADO */}
       {exibeImagem && (
         <ModalGlobalComponent cancelar={() => setExibeImagem(false)}>
-           <Box sx={{ p: 2 }}>
-             <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#1a1a1a', mb: 2 }}>
-               Evidências: {item?.visitante?.nomeCompleto}
-             </Typography>
-             <Template.imagemArea>
-                {['entrada', 'saida'].map((tipo) => (
-                  item?.[tipo]?.imagem && (
-                    <Template.divArea key={tipo}>
-                      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 1 }}>
-                        <Typography variant="caption" sx={{ fontWeight: 800, textTransform: 'uppercase', color: '#26a69a' }}>{tipo}</Typography>
-                        <Tooltip title="Baixar Foto">
-                          <IconButton size="small" onClick={() => handleDownload(item[tipo].imagem, `Foto_${tipo}_${item.nomeCompleto}`)}>
-                            <DownloadIcon fontSize="small" sx={{ color: '#26a69a' }} />
-                          </IconButton>
-                        </Tooltip>
-                      </Stack>
-                      <Template.imgem src={item[tipo].imagem}/>
-                    </Template.divArea>
-                  )
-                ))}
-             </Template.imagemArea>
-           </Box>
+          <Box sx={{ p: 2 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#1a1a1a', mb: 2 }}>
+              Evidências: {item?.visitante?.nomeCompleto}
+            </Typography>
+            <Template.imagemArea>
+              {['entrada', 'saida'].map((tipo) => (
+                item?.[tipo]?.imagem && (
+                  <Template.divArea key={tipo}>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 1 }}>
+                      <Typography variant="caption" sx={{ fontWeight: 800, textTransform: 'uppercase', color: '#26a69a' }}>{tipo}</Typography>
+                      <Tooltip title="Baixar Foto">
+                        <IconButton size="small" onClick={() => handleDownload(item[tipo].imagem, `Foto_${tipo}_${item.nomeCompleto}`)}>
+                          <DownloadIcon fontSize="small" sx={{ color: '#26a69a' }} />
+                        </IconButton>
+                      </Tooltip>
+                    </Stack>
+                    <Template.imgem src={item[tipo].imagem} />
+                  </Template.divArea>
+                )
+              ))}
+            </Template.imagemArea>
+          </Box>
         </ModalGlobalComponent>
       )}
 

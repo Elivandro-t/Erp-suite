@@ -19,10 +19,10 @@ import { subjet } from "../../jwt/jwtservice";
 
 const settings = [
   { name: "Minha Conta", icon: <AccountBoxIcon fontSize="small" /> },
-  { name: "Portaria Pendentes", permissions: ["REGISTRAR_SAIDA"], icon: <PendingActionsIcon fontSize="small" /> },
+  // { name: "Portaria Pendentes", permissions: ["REGISTRAR_SAIDA"], icon: <PendingActionsIcon fontSize="small" /> },
   { name: "Meus Registros", permissions: ["VISUALIZAR_REGISTRO"], icon: <AssignmentIcon fontSize="small" /> },
-  { name: "Registros Gerais", permissions: ["GERENCIAR_REGISTROS"], icon: <AssignmentIcon fontSize="small" /> },
-  { name: "Controle De Registros", permissions: ["GERENCIAR_REGISTROS"], icon: <AdminPanelSettingsIcon fontSize="small" /> },
+  // { name: "Registros Gerais", permissions: ["GERENCIAR_REGISTROS"], icon: <AssignmentIcon fontSize="small" /> },
+  // { name: "Controle De Registros", permissions: ["GERENCIAR_REGISTROS"], icon: <AdminPanelSettingsIcon fontSize="small" /> },
   { name: "Criar Registro", permissions: ["CRIAR_REGISTRO"], icon: <AddCircleOutlineIcon fontSize="small" /> },
   { name: "Sair", icon: <Logout fontSize="small" /> }
 ];

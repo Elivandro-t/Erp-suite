@@ -1,94 +1,73 @@
-import styled, { keyframes } from "styled-components";
-// Animação de entrada
-export const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
-`;
+import styled from "styled-components";
 
-// Container principal
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-    background-color: #fff; /* fundo branco */
-
   align-items: center;
+  justify-content: center;
   height: 100vh;
+  width: 100%;
+  background-color: #f8fafc;
   text-align: center;
   padding: 20px;
-  gap: 30px;
-  animation: ${fadeIn} 0.8s ease forwards;
+`;
 
-  @media (min-width: 768px) {
-    padding: 50px;
+export const Illustration = styled.div`
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
   }
 `;
 
 export const Title = styled.h1`
-  font-size: 2.5rem;
-  color: #ff6b6b;
-  margin-bottom: 10px;
-
-  @media (min-width: 768px) {
-    font-size: 4rem;
-  }
+  font-size: 80px;
+  font-weight: 900;
+  color: #004d40;
+  margin: 0;
+  letter-spacing: -2px;
+  line-height: 1;
 `;
 
-export const Subtitle = styled.p`
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 20px;
-
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
-
-export const ZapDaiLogo = styled.span`
-  font-weight: bold;
-  color: #ccbcb7;
-  font-size: 1.2rem;
-  display: block;
-  margin-top: 20px;
+export const Subtitle = styled.h2`
+  font-size: 20px;
+  color: #1e293b;
+  margin: 10px 0 20px;
+  font-weight: 600;
 `;
 
 export const Button = styled.button`
-  background-color: #7b9dfc; /* azul suave */
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background-color: #26a69a;
   color: white;
   border: none;
-  padding: 12px 30px;
-  font-size: 1rem;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(38, 166, 154, 0.2);
+
   &:hover {
-     transform: translateY(-1px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    background-color: #6a8de5; /* azul hover mais escuro */
+    background-color: #2bbbad;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(38, 166, 154, 0.3);
   }
 
   &:active {
-    background-color: #5c7bd1;
-  }
-
-
-  @media (min-width: 768px) {
-    font-size: 1.2rem;
-    padding: 15px 40px;
+    transform: scale(0.98);
   }
 `;
 
-export const Image = styled.img`
-  width: 60%;
-  max-width: 300px;
-  margin: 20px 0;
-  animation: ${fadeIn} 1s ease forwards;
-
-  @media (min-width: 768px) {
-    width: 300px;
-  }
+export const ZapDaiLogo = styled.div`
+  position: absolute;
+  bottom: 30px;
+  font-size: 12px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
 `;

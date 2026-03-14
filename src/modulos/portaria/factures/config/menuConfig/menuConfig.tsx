@@ -28,28 +28,11 @@ export const MenuConfig = () => {
         <Template.continer>
             <Template.areaMenu>
                 <BotaoVoltar />
-                <Template.menu>
-                    <Template.menu_nav>
-                        <Template.menu_ul>
-                            {ObjConfig.flatMap((item, index) => (
-                                <Template.menu_li key={index}>
-                                    {item.label}
-                                    <Template.submenu>
-                                        {item.items.filter(sub => hasPermission(sub.permission)).map((sub, i) => (
-                                            <div key={i}>
-                                                <Link to={sub?.to as any}>
-                                                    <Template.submenu_item>{sub.label}</Template.submenu_item>
-                                                </Link>
-                                            </div>
-                                        ))}
-                                    </Template.submenu>
-                                </Template.menu_li>
-                            ))}
-                        </Template.menu_ul>
-                    </Template.menu_nav>
-                </Template.menu>
+               
             </Template.areaMenu>
-            <Template.logo src={logo} onClick={hendleHome} />
+             <Template.tituloTexto onClick={hendleHome}>
+                ERP <span>LOGÍSTICA</span>
+            </Template.tituloTexto>
 
         </Template.continer>
 

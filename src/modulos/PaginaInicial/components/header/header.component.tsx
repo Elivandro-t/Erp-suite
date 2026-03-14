@@ -53,11 +53,10 @@ export const HeaderPaginaInicial = ({ handleBtn, subtitulo, ativaBtnDrower }: pr
                         <MenuIcon sx={{ color: '#5d87ff', fontSize: 24 }} />
                     </IconButton>
                 }
-                <Link to={"/"}>
-                    <h1>
-                        SUITE CORE
-                        {subtitulo && <small>{subtitulo}</small>}
-                    </h1>
+                 <Link to={"/"}>
+                    <Template.tituloTexto onClick={handleBtn}>
+                        ERP - <span>SUITE CORE</span>  {subtitulo && <small>{subtitulo}</small>}
+                    </Template.tituloTexto>
                 </Link>
             </Template.contaier>
 

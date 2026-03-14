@@ -2,14 +2,13 @@ import styled from "styled-components";
 
 export default {
   container: styled.div`
-    width: 270px;
-    /* Verde Cana Profissional - Estilo moderno e limpo */
-    background-color: #e0f2f1; 
+    width: 240px;
+    /* Retornando ao Verde Cana/Gelo Profissional */
+    background-color: #f8fafc; 
     height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.05);
     flex-shrink: 0;
     transition: all 0.3s ease;
-    /* Box Shadow lateral que você pediu */
     box-shadow: 6px 0 18px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
@@ -33,12 +32,11 @@ export default {
     flex: 1;
     overflow-y: auto;
     padding: 24px 16px;
-
-    &::-webkit-scrollbar { width: 5px; }
+     &::-webkit-scrollbar { width: 8px; }
     &::-webkit-scrollbar-thumb {
       background: #80cbc4;
       border-radius: 10px;
-    }
+    } 
   `,
 
   LabelSection: styled.div`
@@ -47,7 +45,7 @@ export default {
     text-transform: uppercase;
     letter-spacing: 1.2px;
     font-weight: 800;
-    color: #004d40;
+    color: #004d40; /* Verde escuro profissional */
     opacity: 0.6;
   `,
 
@@ -77,8 +75,8 @@ export default {
       transition: all 0.2s;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.4);
-        color: #26a69a;
+        background-color: rgba(38, 166, 154, 0.1);
+        color: #26a69a; /* Verde água principal */
       }
     }
   `,
@@ -99,7 +97,7 @@ export default {
       transition: all 0.2s ease;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(38, 166, 154, 0.1);
         color: #26a69a;
         transform: translateX(5px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
@@ -123,7 +121,7 @@ export default {
     max-height: ${props => (props.isOpen ? "500px" : "0")};
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 0 0 12px 12px;
   `,
 
@@ -148,7 +146,7 @@ export default {
 
     &:hover {
       color: #26a69a;
-      background-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.8);
       &::before { background-color: #26a69a; }
     }
   `

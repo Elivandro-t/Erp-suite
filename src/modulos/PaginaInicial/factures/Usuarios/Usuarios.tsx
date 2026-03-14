@@ -1,13 +1,15 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import Template from "./UsuariosCss"
-import Api from "../../service/apiUsuario"
+import Template from "./UsuariosCss";
+import Api from "../../service/apiUsuario";
 import AddIcon from "@mui/icons-material/Add";
 import Avatar from '@mui/material/Avatar';
-import { TextField, IconButton, Box, Tooltip, Typography } from '@mui/material';
+import { IconButton, Box, Tooltip, Typography } from '@mui/material';
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 import { useNavigate } from "react-router-dom";
 import { notify } from "../../../portaria/service/snackbarService";
@@ -16,17 +18,21 @@ import { PopupUpdatePerfilComponent } from "../../../../components/updatePerfilC
 import { Paginator } from "../../../../components/paginator/paginator";
 import { LoadingSecundary } from "../../../../components/LoadingSecundary/LoadingSecundary";
 import { subjet } from "../../../../jwt/jwtservice";
-// ... seus imports permanecem iguais
 
 export const UsuarioListaComponets = () => {
- const [lista, setLista] = useState<any[]>([])
+  const [lista, setLista] = useState<any[]>([]);
   const [id, setId] = useState('');
-  const [busca, setBusca] = useState("")
+  const [busca, setBusca] = useState("");
   const [totaPage, setTotalPage] = useState(0);
-  const nativete = useNavigate()
   const [loading, setLoading] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+  const [order, setOrder] = useState<{ field: string, direction: 'asc' | 'desc' }>({ field: 'nome', direction: 'asc' });
+  const [updateAtivo, setUpdateModal] = useState(false);
+
+  const navigate = useNavigate();
   const user = subjet();
   const permission = user?.permissoes;
+
   const onSubmit = async (valuePage?: any) => {
     setLoading(true);
     const resposta = await Api.listAusuario(busca.trim(), valuePage);
@@ -35,195 +41,177 @@ export const UsuarioListaComponets = () => {
         setLoading(false);
         setLista(resposta.content);
         setTotalPage(resposta?.totalPages);
-      }, 1000);
+      }, 800);
     }
-  }
+  };
+
+  const handleSort = (field: string) => {
+    const isAsc = order.field === field && order.direction === 'asc';
+    const direction = isAsc ? 'desc' : 'asc';
+    setOrder({ field, direction });
+
+    const sortedData = [...lista].sort((a, b) => {
+      let valA = a[field]?.nome || a[field];
+      let valB = b[field]?.nome || b[field];
+      
+      if (typeof valA === 'string') valA = valA.toLowerCase();
+      if (typeof valB === 'string') valB = valB.toLowerCase();
+
+      if (valA < valB) return direction === 'asc' ? -1 : 1;
+      if (valA > valB) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+    setLista(sortedData);
+  };
+
   const handleNextPage = (_: ChangeEvent<unknown>, value: number) => {
-    const valuePage = value - 1;
-    onSubmit(valuePage);
-  }
+    onSubmit(value - 1);
+  };
+
   useEffect(() => {
-    if (busca.trim() === "") {
-      onSubmit(); // se o campo estiver vazio, busca toda a lista
-    }
-  }, [busca])
-  const hendleUpdate = (itemResposta: any) => {
-    setId(itemResposta.id)
-    setUpdateModal(true)
-  }
-  const handleNovoUsuario = () => {
-    nativete("/config/cadastro/usuario")
-  }
-  const handleAtivo = (idusuario: any) => {
-    const ativo = true;
-    hendleBuscaApi(null, ativo, idusuario);
-    console.log(" ativo " + ativo + " susuario " + idusuario)
-  }
-  const handleAtivoFalse = (idusuario: any) => {
-    const ativo = false;
-    hendleBuscaApi(null, ativo, idusuario);
-  }
-  const [updateAtivo, setUpdateModal] = useState(false)
+    if (busca.trim() === "") onSubmit();
+  }, [busca]);
+
+  const hendleUpdate = (item: any) => {
+    setId(item.id);
+    setUpdateModal(true);
+  };
+
   const hendleBuscaApi = async (data?: any, ativo?: any, usuarioId?: any) => {
     const idFinal = id || usuarioId;
     const response = await api.AdicionarPefil(idFinal, data?.idPerfil, ativo);
     if (response) {
-        setUpdateModal(false)
-        notify(response.msg, "success")
-        onSubmit()
-
+      setUpdateModal(false);
+      notify(response.msg, "success");
+      onSubmit();
     }
+  };
 
-  }
   const handleConvetData = (data: any) => {
-       const d = new Date(data);
+    const d = new Date(data);
+    return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()} às ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  };
 
-    const dia = String(d.getDate()).padStart(2, "0");
-    const mes = String(d.getMonth() + 1).padStart(2, "0");
-    const ano = d.getFullYear();
+  const renderSortIcon = (field: string) => {
+    if (order.field !== field) return null;
+    return order.direction === 'asc' ? 
+      <ArrowUpwardIcon sx={{ fontSize: 14, ml: 0.5, verticalAlign: 'middle' }} /> : 
+      <ArrowDownwardIcon sx={{ fontSize: 14, ml: 0.5, verticalAlign: 'middle' }} />;
+  };
 
-    const hora = String(d.getHours()).padStart(2, "0");
-    const minuto = String(d.getMinutes()).padStart(2, "0");
-
-    return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
-    }
   return (
-    <>
-      <Template.container>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Template.titulo>Gestão de Usuários</Template.titulo>
-          {/* O Paginator fica melhor posicionado aqui ou no final */}
-        </Box>
+    <Template.container>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+        <Template.titulo>Gestão de Usuários</Template.titulo>
+      </Box>
 
-        <Template.FormSub>
-          <Template.CamposInput>
-            <TextField
-              variant="outlined"
-              size="small"
-              placeholder="Pesquisar por nome ou e-mail..."
+      <Template.FormSub>
+        <Template.CamposInput>
+          <Template.InputWrapper>
+            <SearchIcon sx={{ color: '#94a3b8', fontSize: 20 }} />
+            <input
+              placeholder="Buscar por nome ou e-mail..."
               value={busca}
               onChange={(e) => setBusca(e.target.value)}
-              sx={{ minWidth: '300px', backgroundColor: '#fff' }}
+              onKeyDown={(e) => e.key === 'Enter' && onSubmit()}
             />
+          </Template.InputWrapper>
+
+          <Tooltip title="Novo Usuário">
             <IconButton
-              onClick={onSubmit}
-              sx={{ backgroundColor: "#6366f1", color: "#fff", "&:hover": { backgroundColor: "#4f46e5" } }}
+              onClick={() => navigate("/required/cadastro/usuario")}
+              sx={{ bgcolor: "#26a69a", color: "#fff", "&:hover": { bgcolor: "#1f8c81" }, borderRadius: '8px', width: 40, height: 40 }}
             >
-              <SearchIcon />
+              <AddIcon />
             </IconButton>
-            
-            <Tooltip title="Cadastrar Novo Usuário">
-                <IconButton
-                onClick={handleNovoUsuario}
-                sx={{ backgroundColor: "#22c55e", color: "#fff", "&:hover": { backgroundColor: "#16a34a" } }}
-                >
-                <AddIcon />
-                </IconButton>
-            </Tooltip>
+          </Tooltip>
 
-            <Box sx={{ flexGrow: 1 }} /> {/* Empurra o paginador para a direita */}
-            <Paginator totalPage={totaPage} handleNextPage={handleNextPage} />
-          </Template.CamposInput>
+          <Box sx={{ flexGrow: 1 }} />
+          <Paginator totalPage={totaPage} handleNextPage={handleNextPage} />
+        </Template.CamposInput>
 
-          <Template.TableContainer>
-            <Template.Table>
-              <thead>
-                <tr>
-                  <th>Membro</th>
-                  <th>E-mail</th>
-                  <th>Função / Filial</th>
-                  <th>Perfil</th>
-                  <th>Device</th>
-                  <th>Último Acesso</th>
-                  <th>Status</th>
-                  {permission?.includes("ADICIONAR_ACESSO") && <th style={{ textAlign: 'right' }}>Ações</th>}
-                </tr>
-              </thead>
-              <tbody>
-                {lista.length === 0 ? (
-                  <tr>
-                    <td colSpan={10} style={{ textAlign: 'center', padding: '40px' }}>
-                       <Typography color="textSecondary">Nenhum usuário encontrado</Typography>
+        <Template.TableContainer>
+          <Template.Table>
+            <thead>
+              <tr>
+                <th onClick={() => handleSort('nome')}>Membro {renderSortIcon('nome')}</th>
+                <th>E-mail</th>
+                <th onClick={() => handleSort('ocupacaoOperacional')}>Função {renderSortIcon('ocupacaoOperacional')}</th>
+                <th onClick={() => handleSort('perfil')}>Perfil {renderSortIcon('perfil')}</th>
+                <th>Device</th>
+                <th>Último Acesso</th>
+                <th onClick={() => handleSort('ativo')}>Status {renderSortIcon('ativo')}</th>
+                {permission?.includes("ADICIONAR_ACESSO") && <th style={{ textAlign: 'right' }}>Ações</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {lista.length === 0 && !loading ? (
+                <tr><td colSpan={8} style={{ textAlign: 'center', padding: '30px', color: '#94a3b8' }}>Nenhum usuário encontrado.</td></tr>
+              ) : (
+                lista.map((item) => (
+                  <Template.Row 
+                    key={item.id} 
+                    isSelected={selectedRow === item.id} 
+                    onClick={() => setSelectedRow(item.id)}
+                  >
+                    <td>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                        <Avatar sx={{ width: 32, height: 32, border: '1px solid #e2e8f0' }} src={item?.avatar} />
+                        <Typography variant="body2" sx={{ fontWeight: 600 }}>{item.nome}</Typography>
+                      </Box>
                     </td>
-                  </tr>
-                ) : (
-                  lista.map((item, key) => (
-                    <tr key={key}>
+                    <td>{item.email}</td>
+                    <td>
+                      <Typography variant="caption" sx={{ display: 'block', fontWeight: 700 }}>{item.ocupacaoOperacional}</Typography>
+                      <Typography variant="caption" color="textSecondary">{item.filial}</Typography>
+                    </td>
+                    <td>
+                      <Box sx={{ px: 1, py: 0.2, bgcolor: selectedRow === item.id ? '#fff' : '#f1f5f9', borderRadius: '4px', display: 'inline-block' }}>
+                        <Typography variant="caption" sx={{ fontWeight: 800 }}>{item?.perfil?.nome || 'N/A'}</Typography>
+                      </Box>
+                    </td>
+                    <td><Template.device>{item?.sessionDevice || "desktop"}</Template.device></td>
+                    <td style={{ fontSize: '12px' }}>{item?.sessionLastLogin ? handleConvetData(item?.sessionLastLogin) : "---"}</td>
+                    <td>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Template.ativo ativo={item?.ativo} />
+                        <Typography variant="caption" sx={{ fontWeight: 500 }}>{item?.ativo ? "Ativo" : "Inativo"}</Typography>
+                      </Box>
+                    </td>
+                    {permission?.includes("ADICIONAR_ACESSO") && (
                       <td>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                          <Avatar 
-                            sx={{ width: 38, height: 38, border: '1px solid #e2e8f0' }} 
-                            src={item?.avatar || "/static/images/avatar/2.jpg"} 
-                          />
-                          <Typography variant="body2" sx={{ fontWeight: 600, color: '#1e293b' }}>
-                            {item.nome}
-                          </Typography>
-                        </Box>
+                        <Template.trBTN>
+                          <IconButton size="small" onClick={(e) => { e.stopPropagation(); hendleUpdate(item); }}>
+                            <EditIcon fontSize="small" />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={(e) => { e.stopPropagation(); item.ativo ? hendleBuscaApi(null, false, item.id) : hendleBuscaApi(null, true, item.id); }}
+                            sx={{ color: item.ativo ? "#ef4444" : "#26a69a" }}
+                          >
+                            {item.ativo ? <LockOpenIcon fontSize="small" /> : <LockIcon fontSize="small" />}
+                          </IconButton>
+                        </Template.trBTN>
                       </td>
-                      <td>{item.email}</td>
-                      <td>
-                        <Typography variant="caption" sx={{ display: 'block', fontWeight: 600 }}>{item.ocupacaoOperacional}</Typography>
-                        <Typography variant="caption" color="textSecondary">{item.filial}</Typography>
-                      </td>
-                      <td>
-                         <Box sx={{ px: 1, py: 0.5, bgcolor: '#f1f5f9', borderRadius: '6px', display: 'inline-block' }}>
-                            <Typography variant="caption" sx={{ fontWeight: 700 }}>{item?.perfil?.nome || 'N/A'}</Typography>
-                         </Box>
-                      </td>
-                      <td>
-                        <Template.device>{item?.sessionDevice || "0"}</Template.device>
-                      </td>
-                      <td style={{ fontSize: '11px', color: '#64748b' }}>
-                        {item?.sessionLastLogin ? handleConvetData(item?.sessionLastLogin) : "Sem acesso"}
-                      </td>
-                      <td>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <Template.ativo ativo={item?.ativo} />
-                          <Typography variant="caption" sx={{ fontWeight: 600 }}>
-                            {item?.ativo ? "Ativo" : "Inativo"}
-                          </Typography>
-                        </Box>
-                      </td>
-                      {permission?.includes("ADICIONAR_ACESSO") && (
-                        <td>
-                          <Template.trBTN>
-                            <Tooltip title="Editar">
-                              <IconButton size="small" onClick={() => hendleUpdate(item)}>
-                                <EditIcon fontSize="small" sx={{ color: '#64748b' }} />
-                              </IconButton>
-                            </Tooltip>
-                            
-                            <Tooltip title={item.ativo ? "Bloquear" : "Ativar"}>
-                                <IconButton 
-                                    size="small" 
-                                    onClick={() => item.ativo ? handleAtivoFalse(item.id) : handleAtivo(item.id)}
-                                    sx={{ color: item.ativo ? "#ef4444" : "#22c55e" }}
-                                >
-                                    {item.ativo ? <LockOpenIcon fontSize="small" /> : <LockIcon fontSize="small" />}
-                                </IconButton>
-                            </Tooltip>
-                          </Template.trBTN>
-                        </td>
-                      )}
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </Template.Table>
-          </Template.TableContainer>
-        </Template.FormSub>
+                    )}
+                  </Template.Row>
+                ))
+              )}
+            </tbody>
+          </Template.Table>
+        </Template.TableContainer>
+      </Template.FormSub>
 
-        {updateAtivo && (
-          <PopupUpdatePerfilComponent 
-            ID={undefined} 
-            handleConfirm={(w) => hendleBuscaApi(w, null, null)} 
-            handleCancel={() => setUpdateModal(false)} 
-            message={""} 
-            ativoBtn={false} 
-          />
-        )}
-        {loading && <LoadingSecundary />}
-      </Template.container>
-    </>
+      {updateAtivo && (
+        <PopupUpdatePerfilComponent 
+          ID={id} 
+          handleConfirm={(w) => hendleBuscaApi(w, null, null)} 
+          handleCancel={() => setUpdateModal(false)} 
+          message={""} 
+          ativoBtn={false} 
+        />
+      )}
+      {loading && <LoadingSecundary />}
+    </Template.container>
   );
 };
