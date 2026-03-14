@@ -5,7 +5,6 @@ import { Logued } from "../../modulos/portaria/service/Logued"
 import { useCallback, useContext, useEffect, useState } from "react";
 import { contextProvider } from "../../reducer/userProvider/userProvider";
 import { subjet } from "../../jwt/jwtservice";
-import logo from "../../assets/logo portaria (1).png"
 import { notify } from "../../modulos/portaria/service/snackbarService";
 import apiUsuario from "../../modulos/PaginaInicial/service/apiUsuario";
 
@@ -23,14 +22,15 @@ export const HeaderComponent = ({ ativoBusca, filial }: props) => {
     );
     const [filias, setFiliaiss] = useState<any[]>([])
     const temPermissaoGerenciar = usuario?.permissoes?.includes("GERENCIAR_USUARIOS");
+
     const handleHome = () => {
         navigate("/");
     }
+
     const handleChangeFilial = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const novaFilial = e.target.value;
         setFilialAtiva(novaFilial);
         setFilial(novaFilial)
-
         localStorage.setItem("@App:filial", novaFilial);
     };
 
@@ -43,16 +43,21 @@ export const HeaderComponent = ({ ativoBusca, filial }: props) => {
         } catch (error) {
             notify("Erro ao carregar filiais", "error");
         }
-    }, []);
+    }, [usuario?.id]);
+
     useEffect(() => {
         carregarFiliais();
-    }, [])
+    }, [carregarFiliais])
 
     return (
         <Header.areaHeader>
             <Header.container>
                 <Header.areaLogo>
-                    <Header.logo src={logo} onClick={handleHome} />
+                    {/* Alterado: Removida a imagem e adicionado o título em texto */}
+                    <Header.tituloTexto onClick={handleHome}>
+                        ERP <span>LOGÍSTICA</span>
+                    </Header.tituloTexto>
+
                     {ativoBusca && (
                         temPermissaoGerenciar ? (
                             <Header.SelectFilial value={filialAtiva} onChange={handleChangeFilial}>
@@ -69,7 +74,6 @@ export const HeaderComponent = ({ ativoBusca, filial }: props) => {
                     )}
                 </Header.areaLogo>
 
-                {/* Wrapper da busca sempre visível */}
                 {ativoBusca && (
                     <Header.wrapperBusca>
                         <Header.busca

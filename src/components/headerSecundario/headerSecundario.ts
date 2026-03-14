@@ -1,101 +1,70 @@
 import styled from "styled-components";
 
 export default {
-  container: styled.header`
-    box-shadow: 0 4px 8px rgba(63, 62, 62, 0.3);
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    font-family: 'Segoe UI', sans-serif;
-    padding:10px 40px;
-    background: var(--header-background);
-    color: white;
-     @media screen {
-      gap: 10px;
-      padding:10px 15px;
-    }
-   
-
-    `,
-    btnLogin:styled.div`
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    `,
-    logo: styled.h1`
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-family: 'Poppins', sans-serif; /* fonte moderna e legível */
-    font-weight: 600;
-    font-size: 28px;
-    color: var(--cor-texto-header); /* azul suave */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* sombra leve para destaque */
-    letter-spacing: 0.5px;
-    cursor: pointer;
-   @media screen {
-      font-size: 14px;
-    }
-    `,
-  busca: styled.input`
-      width:50%;
-      border-radius:5px;
-      padding:5px;
-      border: 1px solid #b6aeaeff;
-      outline: none;
-    `,
-  ButtomService: styled.a` 
-    display:flex;
-    align-items:center;
-    color: var(--cor-texto-header);
-    height:30px;
-    padding:5px 15px;
-    border-radius:10px;
-    text-decoration: none;
-    letter-spacing:0.5;
-    font-family: "intel",sans-serif;
-    font-size: 14px;
-    border:0;
-    cursor:pointer;
-   &:hover {
-    color: white;    
-  }
-    `,
-  car: styled.button` 
-   display:flex;
-   align-items:center;
-   background-color:transparent;
-   color: var(--cor-font);
-   height:30px;
-    padding:5px 15px;
-    gap:5px;
-    border-radius:10px;
-    border:0;
-    cursor:pointer;
-    transition: background-color 0.3s ease;
-    &:active {
-    transform: scale(0.95); /* Dá um "zoom" menor quando clicado */
-  }
-    `,
-  iconCar: styled.section``,
-  perfil: styled.div`
-  display: flex;
+  areaHeader: styled.header`
+    width: 100%;
+    height: 65px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6eeec; /* Borda verde-gelo bem fininha */
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(38, 166, 154, 0.05);
   `,
-  areaHeader: styled.div`
-   display:flex;
-   flex-direction:column;
-     position: sticky;
-  z-index: 1000;
-  top:0;
-   `,
-  categoriasItens: styled.div`
-   padding:10px  0;
-   width: 100%;
-   display: flex;
-   align-items: center;
-   gap: 10px;
-   background-color:var(--cor-principal);
-   `
-}
 
+  container: styled.div`
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
 
+  btnLogin: styled.div`
+    display: flex;
+    align-items: center;
+    min-width: 40px;
+  `,
+
+  logo: styled.h1`
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #26a69a; /* Verde Cana Principal */
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 14px;
+      /* Garante que o título não fique colado nas bordas em telas pequenas */
+      padding: 0 10px;
+    }
+  `,
+
+  // Estilos extras caso você use botões dentro do header futuramente
+  ButtomService: styled.button`
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #4a635d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  `
+};

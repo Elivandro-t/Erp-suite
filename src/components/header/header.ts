@@ -8,21 +8,23 @@ export default {
     z-index: 1000;
     top: 0;
     width: 100%;
-    background: var(--header-background, #1a1a1a);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); 
+    border-bottom: 2px solid #e0f2f1;
+    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.05);
   `,
 
   container: styled.header`
     display: flex;
-    flex-wrap: wrap; /* Permite que a busca "caia" para a linha de baixo no mobile */
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 15px;
+    padding: 10px 20px;
     gap: 15px;
 
     @media (min-width: 768px) {
-      flex-wrap: nowrap; /* Trava tudo em uma linha só no desktop */
-      padding: 10px 40px;
+      flex-wrap: nowrap;
+      padding: 0 40px;
       height: 75px;
     }
   `,
@@ -31,101 +33,109 @@ export default {
     display: flex;
     gap: 12px;
     align-items: center;
-    order: 1; /* Primeiro item */
+    order: 1;
   `,
 
-  logo: styled.img`
-    height: 32px;
-    object-fit: contain;
+  tituloTexto: styled.h1`
+    font-size: 18px;
+    font-weight: 800;
+    color: #004d40;
     cursor: pointer;
-    @media (min-width: 768px) { height: 42px; }
+    margin: 0;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+
+    span {
+      color: #26a69a;
+      font-weight: 400;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 22px;
+    }
   `,
 
   SelectFilial: styled.select`
-    background: rgba(161, 114, 114, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    padding: 6px 10px;
+    background: #ffffff;
+    border: 1px solid #b2dfdb;
+    color: #004d40;
+    padding: 6px 12px;
     border-radius: 8px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     outline: none;
-    max-width: 70px;
-
-    option { background: #222; }
-
-    @media (min-width: 768px) { max-width: 150px; }
   `,
 
   BadgeFilial: styled.span`
-    font-weight: 700;
-    font-size: 12px;
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 800;
+    font-size: 11px;
+    padding: 6px 14px;
+    background: #00796b;
+    border-radius: 50px;
+    color: #fff;
+    text-transform: uppercase;
   `,
 
+  /* BUSCA REESTABELECIDA */
   wrapperBusca: styled.div`
-    order: 3; /* No mobile, vai para baixo de tudo */
+    order: 3;
     width: 100%;
-    
     @media (min-width: 768px) {
-      order: 2; /* No desktop, fica no meio */
+      order: 2;
       flex: 1;
-      max-width: 500px;
+      max-width: 450px;
     }
   `,
 
   busca: styled.input`
     width: 100%;
-    height: 45px; /* Maior no mobile para facilitar o toque */
-    border-radius: 10px;
+    height: 42px;
+    border-radius: 12px;
     padding: 0 15px;
-    border: 1px solid transparent;
-    background: rgba(255, 255, 255, 0.12);
-    color: white;
-    font-size: 16px; /* Evita zoom automático chato no iPhone */
+    border: 1px solid #b2dfdb;
+    background: #f1f8f7;
+    color: #004d40;
     outline: none;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 
-    &::placeholder { color: rgba(255, 255, 255, 0.5); }
+    &::placeholder { color: #80cbc4; }
 
     &:focus {
       background: #fff;
-      color: #000;
-      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
-    }
-
-    @media (min-width: 768px) {
-      height: 40px;
-      font-size: 14px;
+      border-color: #26a69a;
+      box-shadow: 0 0 0 4px rgba(38, 166, 154, 0.1);
     }
   `,
 
+  /* PERFIL REESTABELECIDO */
   perfil: styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
-    order: 2; /* No mobile, fica ao lado da logo */
-
+    order: 2;
     @media (min-width: 768px) {
-      order: 3; /* No desktop, vai para o final */
-      padding-left: 15px;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      order: 3;
+      padding-left: 20px;
+      border-left: 1px solid rgba(0, 77, 64, 0.1);
     }
   `,
 
   nomeUsuario: styled.div`
-    display: none; /* Esconde texto longo no mobile */
+    display: none;
     @media (min-width: 1024px) {
       display: block;
       text-align: right;
-      color: white;
+      color: #004d40;
       font-size: 14px;
-      strong { display: block; font-size: 10px; opacity: 0.6; text-transform: uppercase; }
+      font-weight: 600;
+      strong { 
+        display: block; 
+        font-size: 9px; 
+        color: #26a69a; 
+        text-transform: uppercase; 
+        opacity: 0.8;
+      }
     }
   `
 };

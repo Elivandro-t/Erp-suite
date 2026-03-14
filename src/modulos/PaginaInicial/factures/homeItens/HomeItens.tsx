@@ -32,17 +32,22 @@ export const HomeItens = () => {
     }, [])
     // p=>perfil.permissoes.includes(p))
     function retornaIcone(modulo: string, valor: any) {
-        switch (modulo) {
-            case "PORTARIA_ACCESS":
-                return <FaTruck color="#5B7FFF" size={valor} />
-            case "INVENTARIO_ACCESS":
-                return <InventoryIcon sx={{ color: '#5B7FFF', fontSize: valor }} />
-            case "RECEBIMENTO_ACCESS":
-                return <SouthWestIcon sx={{ color: '#5B7FFF', fontSize: valor, fontWeight: "bold" }} />
-            case "LOGISTICO_ACCESS":
-                return <Inventory2Icon sx={{ color: '#5B7FFF', fontSize: valor, fontWeight: "bold" }} />
-        }
+    // Cor do ícone combinando com o menu Verde Cana
+    const iconColor = "#26a69a"; 
+    
+    switch (modulo) {
+        case "PORTARIA_ACCESS":
+            return <FaTruck color={iconColor} size={valor} />
+        case "INVENTARIO_ACCESS":
+            return <InventoryIcon sx={{ color: iconColor, fontSize: valor }} />
+        case "RECEBIMENTO_ACCESS":
+            return <SouthWestIcon sx={{ color: iconColor, fontSize: valor, fontWeight: "bold" }} />
+        case "LOGISTICO_ACCESS":
+            return <Inventory2Icon sx={{ color: iconColor, fontSize: valor, fontWeight: "bold" }} />
+        default:
+            return null;
     }
+}
     return (
         <Template.container_2>
             {menu.length === 0 &&

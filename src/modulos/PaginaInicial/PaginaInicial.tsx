@@ -22,11 +22,13 @@ function PaginaInicial() {
     const ativo = true;
     return (
         <Template.container>
-            <HeaderPaginaInicial ativaBtnDrower={ativo}  handleBtn={handleBtn} />
+            {ativoMenu &&
+                          <MenuDropComponent handleBtn={handleBtn} ></MenuDropComponent>
+
+            }
             <Template.main>
-                {ativoMenu &&
-                    <MenuDropComponent handleBtn={handleBtn} ></MenuDropComponent>
-                }
+                <HeaderPaginaInicial ativaBtnDrower={ativo} handleBtn={handleBtn} />
+
                 <Template.scroll>
                     <Outlet></Outlet>
 

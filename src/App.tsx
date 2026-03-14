@@ -19,9 +19,6 @@ const App = () => {
     );
   }
   const PortariaRoutes = lazyWidth(() => import("./modulos/portaria/PortariaRoutes"), 500);
-    const Logistico = lazyWidth(() => import("./modulos/logistico/logisticoRouter"), 500);
-        const Recebimento = lazyWidth(() => import("./modulos/recebimento/recebimento.router"), 500);
-
   const NotFund = lazyWidth(() => import("./paga_segunds/404/NotFund"), 500);
   const UnauthorizedPage = lazyWidth(() => import("./paga_segunds/unauthorized/unauthorized"), 500);
   const PaginaPrincipal = lazyWidth(() => import("./modulos/PaginaInicial/Pagina.router"), 500);
@@ -44,16 +41,6 @@ const App = () => {
             <Route path="portaria/*" element={
               <ProtectedRoute allowedPermissions="PORTARIA_ACCESS">
                 <PortariaRoutes />
-              </ProtectedRoute>
-            } />
-             <Route path="logistico/*" element={
-              <ProtectedRoute allowedPermissions="LOGISTICO_ACCESS">
-                <Logistico />
-              </ProtectedRoute>
-            } />
-             <Route path="recebimento/*" element={
-              <ProtectedRoute allowedPermissions="LOGISTICO_ACCESS">
-                <Recebimento />
               </ProtectedRoute>
             } />
             <Route index path="verify" element={<LoadingR />} />

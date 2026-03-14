@@ -45,58 +45,44 @@ export const HeaderPaginaInicial = ({ handleBtn, subtitulo, ativaBtnDrower }: pr
         }
     };
     return (
+        // ... no retorno do seu componente
         <Template.header>
             <Template.contaier>
                 {ativaBtnDrower &&
-                    <IconButton onClick={handleBtn} edge="start" color="inherit"  aria-label="menu">
-                        <MenuIcon sx={{ color: '#f7f8fc' ,fontSize:28}} />
+                    <IconButton onClick={handleBtn} sx={{ background: '#f0f5ff', '&:hover': { background: '#e0eaff' } }}>
+                        <MenuIcon sx={{ color: '#5d87ff', fontSize: 24 }} />
                     </IconButton>
                 }
                 <Link to={"/"}>
-                    <h1 >ERP / LOGISTICA <small>{subtitulo ? "- Controle " + subtitulo : null}</small></h1>
+                    <h1>
+                        SUITE CORE
+                        {subtitulo && <small>{subtitulo}</small>}
+                    </h1>
                 </Link>
             </Template.contaier>
+
             {Logued() && (
                 <Template.perfil>
-                    {usuario && usuario?.nome &&
-                        <Template.nomeUsuario><strong>Olá</strong> {usuario?.nome.split(" ")[0]}</Template.nomeUsuario>
-                    }
-                    <IconButton onClick={handleOpenUserMenu} >
-
-                        {contex?.usuario?.avatar ? (
-                            <Avatar style={{ objectFit: "contain" }} alt={usuario?.nome} src={contex?.usuario?.avatar} />
-                        ) : (
-                            <Avatar alt={usuario?.nome} src="/static/images/avatar/2.jpg" />
-
-                        )
-                        }
+                    {usuario?.nome && (
+                        <Template.nomeUsuario>
+                            Olá, <strong>{usuario.nome.split(" ")[0]}</strong>
+                        </Template.nomeUsuario>
+                    )}
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar
+                            sx={{
+                                width: 35,
+                                height: 35,
+                                border: '2px solid #fff',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            }}
+                            alt={usuario?.nome}
+                            src={contex?.usuario?.avatar || "/static/images/avatar/2.jpg"}
+                        />
                     </IconButton>
-                    <Menu
-                        sx={{ mt: '45px' }}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right'
-                        }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                    >
-                        {settings.flatMap((setting) => (
-                            <MenuItem key={setting.name} onClick={() => handleCloseUserMenu(setting?.name)}>
-                                <Typography sx={{ textAlign: 'center' }}>{setting?.name}</Typography>
-
-                            </MenuItem>
-                        ))}
-                    </Menu>
+                    {/* ... Menu MUI */}
                 </Template.perfil>
-            )
-            }
+            )}
         </Template.header>
     )
 }

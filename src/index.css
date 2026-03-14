@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-:root{
-  --cor-principal: #ffffff;
-  --cor-font:#7b9dfc;
-  --height:100vh;
-  /* --cor-auth:#f1f4f8; */
-  --header-background: linear-gradient(90deg, #4527A0, #1565C0);
-  --cor-texto-header: #EBEBEB;
-  --cor-titulo:#4B3B9D;
-  --cor-texto-campos:#374151;
-  --font-titulo-label:'Segoe UI', Roboto, Arial, sans-serif;
-  --cor-texto-label:#686666;
-  --font-texto-label:16px;
-  --cor-texto-titulo:#4B0082;
-
+:root {
+  --color-primary: #4F6EF7;
+  --bg-body: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: #f1f5f9;
+  --sidebar-item-hover: #eff6ff;
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }
+
+
 *{
   margin: 0;
   padding: 0;
@@ -21,6 +18,6 @@
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 body{
-      background-color: #f8fafc;
+      background-color: var(--bg-body);
 
 }

@@ -10,7 +10,7 @@ export function FiltroFIlialUsuario({ listaFiliais, carregarDadosLogistico, fili
     return (
         <Template.FilterArea>
             <Template.SelectGroup>
-                <Template.Label>Portaria Filial</Template.Label>
+                {/* <Template.Label>Portaria Filial</Template.Label> */}
                 <Template.Select
                     onChange={(e) => carregarDadosLogistico(e.target.value)}
                 >

@@ -59,19 +59,24 @@ height: 100vh;
 
   `,
   link: styled.div`
-            background: white;
-            padding: 20px;
-            text-decoration:none;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: .2s;
-            border-left: 4px solid #5B7FFF;
-            &:hover{
-                   transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(46, 45, 45, 0.15);
-             background: #f7f5f5;
-            }
+            background: #ffffff; /* Branco puro para os cards */
+    padding: 35px 25px;
+    border-radius: 20px;
+    /* Sombra mais definida para dar profundidade */
+    box-shadow: 0 10px 25px -5px rgba(0, 77, 64, 0.08); 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 6px solid #26a69a; /* Barra lateral verde cana */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -10px rgba(0, 77, 64, 0.15);
+      border-left-color: #004d40;
+    }
                  @media screen and (max-width: 560px){
                   padding: 10px ;
    } 

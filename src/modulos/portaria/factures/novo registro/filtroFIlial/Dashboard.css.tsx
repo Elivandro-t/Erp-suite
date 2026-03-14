@@ -5,8 +5,6 @@ const Template = {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
-    padding: 10px 0;
 
     @media (min-width: 768px) {
       width: auto;

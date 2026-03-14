@@ -1,125 +1,101 @@
-import { MdInbox } from "react-icons/md";
 import styled from "styled-components";
+
 export default {
-
   container: styled.div`
-  display: flex;
-  height: 100%;
-  flex-direction: column;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f8fafc; /* Um cinza azulado bem leve para o fundo */
+    overflow: hidden;
+  `,
 
-    `,
-  main: styled.div`
+  main: styled.main`
     flex: 1;
-  display: flex;
-  background: #f4f6f9;      
-;
-
-    `,
-  container_2: styled.div`
-  flex: 1;
-  padding: 0 10px;
-  position: relative;
-
-
-  padding-right: 8px; /* evita cortar scrollbar */
-    overflow-x: hidden;
-  `,
-  scroll: styled.div`
-    width: 100%;
-    height: calc(100vh - 80px);
-    overflow:auto;
-    padding: 20px 5px;
-    scrollbar-width: thin;
-  `,
-  titulo: styled.h2`
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 16px 10px;
-    color:#444;
-     @media screen and (min-width: 560px){
-        margin: 20px 0 16px 10px;
-
-   } 
-  `,
-  grid: styled.div`
-    width: 100%;
-    display: grid;
-    padding: 0 10px;
-    grid-template-columns:repeat(2,1fr);
-     @media screen and (max-width: 560px){
     display: flex;
     flex-direction: column;
-   } 
-
-  /* grid-template-columns:repeat(auto-fill,minmax(2,1fr)); */
-  gap: 20px;
+    height: 100vh;
+    position: relative;
+    background-color: #f8fafc;
   `,
+
+  // Área onde o conteúdo (Outlet) aparece com scroll
+  scroll: styled.div`
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+    
+    /* Scrollbar minimalista para não poluir o design */
+    &::-webkit-scrollbar { width: 6px; }
+    &::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+  `,
+
+  // Estilização para a Grid de Módulos (caso use na Home)
+  grid: styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  `,
+
+  // Card Moderno com o BoxShadow que você pediu
   link: styled.div`
-            background: white;
-            padding: 20px;
-            text-decoration:none;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: .2s;
-            border-left: 4px solid #5B7FFF;
-            &:hover{
-                   transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(46, 45, 45, 0.15);
-             background: #f7f5f5;
-            }
-  `,
-  card_title: styled.div`
-            font-size: 22px;
-            font-family: "inter",inherit, Helvetica, sans-serif;
-            color: #504a4aff;
-            margin: 10px 0;
-            margin-bottom: 8px;
-  `,
-  card_desc: styled.div`
-  font-size: 14px;
-            color: #555;`,
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
 
-  disabledCard: styled.div`
-    padding: 20px;
-  border-radius: 14px;
-  background: #3a3030;
-  border: 1px solid #444;
-  cursor: not-allowed;
-  opacity: 0.5;
-  pointer-events: none;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-`,
-  small: styled.small`
-    color: #c9c9c9;
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #5d87ff;
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      border-color: #5d87ff33;
+      
+      &::after { opacity: 1; }
+    }
   `,
-  semItens: styled.div`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      height: 60vh;
-      font-size: 16px;
-      gap: 10px;
-      opacity: 0.8;
-    `,
-  iconSemItens: styled(MdInbox)`
-      font-size: 60px;
-      color: #999;
-    `,
+
+  card_title: styled.h3`
+    font-size: 18px;
+    color: #2a3547;
+    font-weight: 700;
+    margin: 8px 0 0 0;
+  `,
+
+  card_desc: styled.p`
+    font-size: 13px;
+    color: #7c8fac;
+    line-height: 1.5;
+    margin: 0;
+  `,
+
   footer: styled.footer`
-  position: fixed;
-  margin-top: 10px;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  color: #c09a9a;
-  padding: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 500;
   `
-}
+};

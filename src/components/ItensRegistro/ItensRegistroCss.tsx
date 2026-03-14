@@ -1,55 +1,44 @@
 import styled from "styled-components";
-import { MdInbox } from "react-icons/md"; // ícone bonito de "sem itens"
+import { MdInbox } from "react-icons/md";
 
 export default {
   container: styled.div`
-    background-color: #f2f2f2;
-    padding: 20px 0;
+    background-color: #f0f4f3;
+    padding: 10px 0;
     min-height: 100vh;
   `,
   area_pedidos: styled.section`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
     padding: 10px;
-    @media screen and (max-width: 700px) {
-     max-width: 700px; 
-         padding: 5px;
-
-    }
   `,
   titulo: styled.h1`
     font-size: 22px;
-    font-weight: bold;
-    font-family:sans-serif;
+    font-weight: 800;
+    color: #26a69a; /* Verde Cana que você gostou */
     margin-bottom: 10px;
-    color: var(--cor-titulo);
   `,
   pedidos: styled.section`
     display: flex;
-    flex-direction: column; /* Mantém itens um abaixo do outro */
-    gap: 20px;
+    flex-direction: column;
+    gap: 12px;
     width: 100%;
-    box-sizing: border-box;
   `,
   cardItem: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
     background: #fff;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
+    border-radius: 12px;
+    padding: 18px;
+    border-left: 5px solid #26a69a; /* Mantive o detalhe estiloso na lateral */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
 
     &:hover {
-      transform: translateY(-2px);
+      transform: scale(1.01);
+      box-shadow: 0px 6px 16px rgba(38, 166, 154, 0.1);
     }
   `,
   card_item_header: styled.div`
@@ -57,176 +46,100 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #ecf0ef;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
   `,
   card_item_center: styled.div`
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     gap: 20px;
-    @media screen and (max-width: 420px) {
-      justify-content: space-between;
-
-    }
   `,
   numeroDoPedido: styled.h4`
     font-size: 14px;
-    color: #756f6f;
+    color: #004d40;
+    font-weight: 800;
   `,
-   data: styled.small`
-    font-size: 9px;
-    font-family: "inter";
-    color: #756f6f;
+  data: styled.small`
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 600;
   `,
   btnAguadandoPagamento: styled.div`
-    background-color: #eeb853;
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 10px;
-    font-size: 14px;
+    background-color: #e0f2f1;
+    color: #00796b;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #b2dfdb;
   `,
-  AreaStatus:styled.div`
+  AreaStatus: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    /* @media screen and (max-width:560px){
-          flex-direction: row-reverse;
-
-    } */
+    gap: 4px;
+    align-items: flex-end;
   `,
-
   Image: styled.img`
-     width: 80px;
-  height: 80px;
-  border-radius: 10%;
-  /* object-fit: cover;
-  border: 2px solid #ddd; */
+    width: 75px;
+    height: 75px;
+    border-radius: 12px;
     object-fit: cover;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin-bottom: 16px;
-      object-position: center bottom top;
-
-
-    @media screen and (min-width: 600px) {
-      margin-bottom: 0;
-    }
+    /* BORDA REMOVIDA AQUI */
+    background-color: #f1f8f7;
   `,
   dataPedido: styled.div`
-  font-size: 14px;
-  color: #999;
-  margin-bottom: 5px;
-  padding-left: 5px;
-`,
+    font-size: 12px;
+    color: #26a69a;
+    font-weight: 900;
+    margin: 10px 0 5px 5px;
+    text-transform: uppercase;
+  `,
   Areaitem: styled.div`
-  display: flex;
-  flex: 1;
-  gap: 1px;
-  flex-direction: column;
-`,
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 3px;
+  `,
   inforLabel: styled.div`
-  display: flex;
-  align-items: center;
-  text-align:center;
-  word-wrap: break-word;
-  gap:2px;
-
-`,
-loading:styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  
-`,
-buttonNext:styled.button`
- color: blue;
- background-color:blue;
- cursor: pointer;
- border: 0;
-  background: transparent;
-  transition: all 0.2s ease-in-out;
-  border-radius: 5px;
-  font-size: 16px;
- &:hover{
-  color: #8484f5;
-  padding: 2px;
-
- }
- &:active{
-    transform: scale(0.97);
-    color: #5555ff;       /* muda a cor quando clicado */
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* efeito de pressionado */
-
- }
-
-`,
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  `,
   Span: styled.span`
-    font-size: 14px;
-    font-family:Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    color:#374151;
-    @media screen and (max-width: 560px){
-      font-size: 12px;
-              letter-spacing: 0.2;
-
-      
-    }
+    font-size: 11px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
   `,
   Infor: styled.small`
-    font-size: 13px;
-    color: #494545;
-        letter-spacing: 0.5;
-        margin-top: 2px;
-    @media screen and (max-width: 560px){
-      font-size: 11px;
-              letter-spacing: 0.2;
-
-      
-    }
-
+    font-size: 14px;
+    color: #004d40;
+    font-weight: 800;
+    letter-spacing: 0.5px;
   `,
-  semItens: styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #555;
-    height: 60vh;
-    font-size: 16px;
-    gap: 10px;
-    opacity: 0.8;
-  `,
-
-  iconSemItens: styled(MdInbox)`
-    font-size: 60px;
-    color: #999;
-  `,
-  btn:styled.div`
-  display: flex;
-  justify-content:flex-end;
-   right: 1;
-   @media screen and (max-width:560px){
-    flex: 0;
-    padding: 5px;
-    
-   }
+  buttonNext: styled.button`
+    color: #26a69a;
+    background: transparent;
+    cursor: pointer;
+    border: 0;
+    font-weight: 800;
+    font-size: 18px;
+    &:hover { color: #004d40; }
   `,
   sentinela: styled.div`
     width: 100%;
-    height: 100px; /* Altura generosa para garantir detecção */
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    background: transparent;
   `,
   loadingFooter: styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #666;
-    font-weight: 500;
+    gap: 10px;
+    color: #26a69a;
+    font-weight: 700;
   `,
-
-
 };

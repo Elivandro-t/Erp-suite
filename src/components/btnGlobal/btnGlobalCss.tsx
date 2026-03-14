@@ -13,43 +13,48 @@ const loginStyles: Record<LoginType, { bg: string; hoverBg: string; color: strin
     color: "#000",
     hoverColor: "#dad6d6",
   },
+  // Representa o estado ATIVO (Verde Cana Escuro)
   admin: {
-    bg: "red",
-    hoverBg: "darkred",
+    bg: "#26a69a", 
+    hoverBg: "#00796b",
     color: "#fff",
     hoverColor: "#fff",
   },
+  // Representa o estado INATIVO (Verde Cana Suave)
   default: {
-    bg: "#007BFF",
-    hoverBg: "#0056b3",
-    color: "#fff",
-    hoverColor: "#fff",
+    bg: "#e0f2f1",
+    hoverBg: "#b2dfdb",
+    color: "#004d40",
+    hoverColor: "#004d40",
   },
 };
 
 export const BtnLogin = styled.button<Props>`
   margin: 5px 0;
   width: 100%;
-  height: 35px;
-  border:0;
-  border-radius: 5px;
-  padding: 0 5px;
-  font-size: 12px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  transform: scale(0.97);
+  height: 38px; /* Aumentei levemente para melhor clique */
+  border: 0;
+  border-radius: 10px; /* Bordas mais arredondadas para combinar com o resto */
+  padding: 0 15px;
+  font-size: 13px;
+  font-weight: 800; /* Mais negrito para destacar */
+  transition: all 0.3s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   
   background-color: ${({ global }) => loginStyles[global]?.bg ?? loginStyles.default.bg};
   color: ${({ global }) => loginStyles[global]?.color ?? loginStyles.default.color};
 
   &:active {
     transform: scale(0.95);
-    font-size: 11px;
   }
 
   &:hover {
     background-color: ${({ global }) => loginStyles[global]?.hoverBg ?? loginStyles.default.hoverBg};
     color: ${({ global }) => loginStyles[global]?.hoverColor ?? loginStyles.default.hoverColor};
+    box-shadow: 0 4px 8px rgba(0, 77, 64, 0.1);
   }
 `;

@@ -65,13 +65,11 @@ export const PerfilComponet = () => {
     }
   };
 
-  // Lógica de Permissões corrigida
   useEffect(() => {
     const decodedUser = subjet();
     const permissions: string[] = decodedUser?.permissoes || [];
 
     const filteredMenu = settings.filter((item) => {
-      // Se não exige permissão específica, ou se o usuário tem a permissão necessária, ou se é o botão Sair
       if (!item.permissions || item.name === "Sair" || item.name === "Minha Conta") return true;
       return item.permissions.some((p) => permissions.includes(p));
     });
@@ -83,7 +81,8 @@ export const PerfilComponet = () => {
     <Perfil.container>
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Menu do Usuário">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: '2px', border: '2px solid #e2e8f0' }}>
+          {/* Ajuste: Borda agora usa o verde cana suave */}
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: '2px', border: '2px solid #b2dfdb' }}>
             <Avatar 
               src={contex?.usuario?.avatar || "/static/images/avatar/2.jpg"} 
               alt={user?.nome}
@@ -93,41 +92,55 @@ export const PerfilComponet = () => {
         </Tooltip>
         
         <Menu
-          sx={{ mt: 'auto' }}
+          sx={{ mt: '45px' }}
           anchorEl={anchorElUser}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           open={Boolean(anchorElUser)}
           onClose={handleClose}
           PaperProps={{
-            elevation: 5,
+            elevation: 4,
             sx: {
               minWidth: 240,
-              borderRadius: '12px',
+              borderRadius: '16px', // Bordas arredondadas como os cards
               padding: '8px',
+              border: '1px solid #e0f2f1',
               '& .MuiMenuItem-root': {
-                borderRadius: '8px',
+                borderRadius: '10px',
                 margin: '2px 0',
-                transition: '0.2s'
+                transition: '0.2s',
+                '&:hover': {
+                  backgroundColor: '#f1f8f7', // Hover no tom cana
+                  color: '#004d40'
+                }
               }
             }
           }}
         >
-          {/* Cabeçalho com Nome do Usuário */}
+          {/* Cabeçalho do Menu */}
           <Box sx={{ px: 2, py: 1.5 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>{user?.nome || "Usuário"}</Typography>
-            <Typography variant="caption" color="text.secondary">Sistema de Portaria</Typography>
+            <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#004d40' }}>
+                {user?.nome || "Usuário"}
+            </Typography>
+            <Typography variant="caption" sx={{ color: '#26a69a', fontWeight: 600 }}>
+                Acesso Portaria
+            </Typography>
           </Box>
           
-          <Divider sx={{ my: 1 }} />
+          <Divider sx={{ my: 1, borderColor: '#e0f2f1' }} />
 
           {menuItens.map((item) => (
             <MenuItem key={item.name} onClick={() => handleAction(item.name)}>
-              <ListItemIcon sx={{ color: item.name === 'Sair' ? '#d32f2f' : '#6366f1' }}>
+              <ListItemIcon sx={{ 
+                // Ajuste: Ícones agora são Verde Cana (#26a69a)
+                color: item.name === 'Sair' ? '#d32f2f' : '#26a69a' 
+              }}>
                 {item.icon}
               </ListItemIcon>
               <Typography sx={{ 
-                fontSize: '0.9rem', 
-                fontWeight: 500,
-                color: item.name === 'Sair' ? '#d32f2f' : 'inherit' 
+                fontSize: '0.85rem', 
+                fontWeight: 600,
+                color: item.name === 'Sair' ? '#d32f2f' : '#004d40' 
               }}>
                 {item.name}
               </Typography>
