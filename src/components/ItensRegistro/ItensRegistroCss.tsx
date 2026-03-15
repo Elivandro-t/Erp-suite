@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { MdInbox } from "react-icons/md";
-
 export default {
   container: styled.div`
     background-color: #f0f4f3;

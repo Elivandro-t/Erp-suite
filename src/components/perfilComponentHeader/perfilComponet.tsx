@@ -8,10 +8,7 @@ import { useContext, useState, useEffect } from "react";
 import Logout from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import PendingActionsIcon from '@mui/icons-material/PendingActions';
-
 import save from "../../localStorage/service-localStorage";
 import { contextProvider } from "../../reducer/userProvider/userProvider";
 import { LoadingSecundary } from "../LoadingSecundary/LoadingSecundary";

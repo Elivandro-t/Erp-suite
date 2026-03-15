@@ -1,4 +1,3 @@
-import { MdInbox } from "react-icons/md";
 import styled from "styled-components";
 
 export default {

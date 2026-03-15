@@ -17,15 +17,15 @@ jobs:
               password: ${{secrets.DOCKERHUB_PASSWORD}}
           - name: build e push de imagem
             run: |
-              docker build -t elivandrolopes/front-portaria:8.0 .
-              docker push elivandrolopes/front-portaria:8.0
-    deploy:
-      needs: build
-      runs-on: [self-hosted,linux]
-      steps:
-        - name: deploy local no docker compose
-          run: |
-            cd /servidor/servidor
-            docker compose pull portaria-front
-            docker compose up -d portaria-front
+              docker build -t elivandrolopes/suitecore:1.0 .
+              docker push elivandrolopes/suitecore:1.0
+    # deploy:
+    #   needs: build
+    #   runs-on: [self-hosted,linux]
+    #   steps:
+    #     - name: deploy local no docker compose
+    #       run: |
+    #         cd /servidor/servidor
+    #         docker compose pull portaria-front
+    #         docker compose up -d portaria-front
         

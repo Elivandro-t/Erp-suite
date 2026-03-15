@@ -1,49 +1,21 @@
-import { Avatar, IconButton, Menu, MenuItem, Typography } from "@mui/material"
+import { Avatar, IconButton} from "@mui/material"
 import { Logued } from "../../../portaria/service/Logued"
 import Template from "./header.css"
 import { subjet } from "../../../../jwt/jwtservice";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useContext } from "react";
 import { contextProvider } from "../../../../reducer/userProvider/userProvider";
-import { Link, useNavigate } from "react-router-dom";
-import React from "react";
+import { Link } from "react-router-dom";
 type props = {
     handleBtn: () => void,
     subtitulo?: string,
     ativaBtnDrower: boolean
 
 }
-const settings = [
-    { name: "Minha Conta" },
-    { name: "Sair" }
-];
+
 export const HeaderPaginaInicial = ({ handleBtn, subtitulo, ativaBtnDrower }: props) => {
     const contex = useContext(contextProvider)
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
-    const navigate = useNavigate()
     const usuario = subjet();
-    const handleCloseUserMenu = (setting: string) => {
-        setAnchorElUser(null);
-
-        switch (setting) {
-            case "Minha Conta":
-                setTimeout(() => {
-                    navigate("/required/profile");
-                }, 1000)
-
-                break;
-            case "Sair":
-                window.location.href = "/verify";
-                contex?.logout()
-                break;
-            default:
-                break;
-        }
-    };
     return (
         // ... no retorno do seu componente
         <Template.header>
@@ -67,7 +39,7 @@ export const HeaderPaginaInicial = ({ handleBtn, subtitulo, ativaBtnDrower }: pr
                             Olá, <strong>{usuario.nome.split(" ")[0]}</strong>
                         </Template.nomeUsuario>
                     )}
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <IconButton onClick={null as any} sx={{ p: 0 }}>
                         <Avatar
                             sx={{
                                 width: 35,
