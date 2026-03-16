@@ -20,7 +20,7 @@ export const HomeComponent = () => {
                 ) : (
                     <Makert.PlaceholderContainer>
                         <div className="emoji">🛡️</div>
-                        <h2 className="title">Bem-vindo à Portaria!</h2>
+                        <h2 className="title">Bem-vindo ao SuiteCore!</h2>
                         <p className="description">
                             Use o menu à esquerda para navegar entre as opções, visualizar registros, e gerenciar usuários.
                         </p>

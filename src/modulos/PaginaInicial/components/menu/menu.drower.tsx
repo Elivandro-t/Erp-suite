@@ -153,9 +153,9 @@ export const MenuDropComponent = ({ handleBtn }: any) => {
                             })}
 
                             <Drower.menu_liApi onClick={handleLogout}>
-                                <div className="logout-btn logout-active">
+                                <div className="logout-btn logout-active" style={{cursor:"pointer"}}>
                                     <LogOutIcon size={18} />
-                                    Sair
+                                     Sair
                                 </div>
                             </Drower.menu_liApi>
                         </Drower.menu_ul>
